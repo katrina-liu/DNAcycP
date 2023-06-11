@@ -32,7 +32,8 @@ def cycle_fasta(inputfile, outputbase):
         print("sequence length: "+chrom+" "+str(onehot_sequence.shape[0]))
         fit = []
         fit_reverse = []
-        for ind_local in np.array_split(range(25, onehot_sequence.shape[0]-24), 100):
+        num_batch = min(100, onehot_sequence.shape[0]-49)
+        for ind_local in np.array_split(range(25, onehot_sequence.shape[0]-24), num_batch):
             onehot_sequence_local = []
             for i in ind_local:
                 s = onehot_sequence[(i-25):(i+25),]
